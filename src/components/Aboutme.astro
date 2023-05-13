@@ -1,0 +1,134 @@
+---
+---
+
+<div>
+  <h2>01.About me</h2>
+  <div class="image-name">
+    <div class="text-container">
+      <p class="bio">
+        I'm Computer Science student at EAFIT University at Medellin, Colombia.
+        Actually I'm 20 years old, I've started coding since I was 17 and then
+        I've studying and learning great skills that let me create and
+        collaborate on amazing projects!. My first steps was creating simple
+        static web pages with <span>HTML</span>, <span>CSS</span> and very basic
+        <span>JS</span>. Then I found <span>React.js</span>
+        that was love at first sight, so I started to study Js ES6+ to get better
+        creating React apps.
+      </p>
+      <p class="bio">
+        Later I found technologies as <span>Java</span> and his most famous framework
+        <span>Spring</span>, so I decided to start on back-end development to
+        start creating my own full stack apps. Here is where I learned about
+        Data Structures and Algorithms
+      </p>
+    </div>
+    <div class="image-box">
+      <div class="border-box"></div>
+      <img id="gh-avatar" src="https://placehold.co/200x200" alt="" />
+    </div>
+  </div>
+</div>
+<script>
+  const token = "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";
+  let imageURL: string = "";
+
+  const ghRequest = async () => {
+    const data = await fetch("https://api.github.com/user", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const res = await data.json();
+    return res;
+  };
+
+  ghRequest().then((result: any) => {
+    console.log(result);
+    imageURL = result.avatar_url;
+    document.getElementById("gh-avatar")!.src = imageURL;
+  });
+</script>
+<style>
+  div {
+    margin: 20px 0;
+  }
+  h2 {
+    color: var(--secondary-color);
+  }
+  h2::after {
+    font-weight: 600;
+    color: var(--p-color);
+    line-height: 1.1;
+  }
+  .image-name {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .image-box {
+    margin: -10px 0;
+  }
+
+  .image-box img {
+    width: 300px;
+    height: 300px;
+    transition: 0.1s;
+    position: relative;
+    bottom: 340px;
+    right: 10px;
+  }
+
+  .border-box {
+    width: 300px;
+    height: 300px;
+    border: solid var(--secondary-color) 5px;
+  }
+
+  .text-container {
+    color: pink;
+    width: 60%;
+  }
+
+  .text-container span {
+    color: var(--secondary-color);
+  }
+
+  .text-container p {
+    color: var(--p-color);
+    font-size: 18px;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+  .bio {
+    width: 100%;
+    color: var(--p-color);
+  }
+  @media only screen and (max-width: 600px) {
+    .text-container {
+      width: 100%;
+    }
+    .image-name {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .image-box img {
+      width: 250px;
+      height: 250px;
+      transition: 0.1s;
+      position: relative;
+      bottom: 290px;
+      right: 10px;
+    }
+    .border-box {
+    width: 250px;
+    height: 250px;
+    border: solid var(--secondary-color) 5px;
+  }
+  }
+</style>

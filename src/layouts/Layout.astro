@@ -1,5 +1,6 @@
 ---
-import Experience from '../components/Experience.astro';
+import Aboutme from "../components/Aboutme.astro";
+import Footer from "../components/Footer.astro";
 
 export interface Props {
   title: string;
@@ -28,9 +29,9 @@ const { title } = Astro.props;
   </head>
 
   <body>
-    <i class="fas fa-bars" id="navButton"></i>
+    <i class="fas fa-bars" id="nav-bars-icon"></i>
     <div class="mobile-header">
-      <nav id="mobileNav">
+      <nav id="mobile-nav">
         <ul>
           <li>
             <p id="about-nav">About</p>
@@ -57,7 +58,7 @@ const { title } = Astro.props;
       <nav>
         <ul>
           <li>
-            <p id="about-nav">About</p>
+            <p id="about-nav-item">About</p>
           </li>
           <li>
             <p id="experience-nav">Experience</p>
@@ -150,7 +151,7 @@ const { title } = Astro.props;
       <section class="main-content">
         <section class="my-profile" id="my_profile">
           <p>Hello, my name is</p>
-          <p class="my-name"><strong>Felipe Arredondo</strong></p>
+          <p class="my-name"><strong class="main-name">Felipe Arredondo</strong></p>
           <p class="my-little-desc">
             <strong>I'm a Software Developer</strong>
           </p>
@@ -164,19 +165,22 @@ const { title } = Astro.props;
           </p>
         </section>
       </section>
-      <!-- <section class="main-content">
-        <Experience />
-      </section> -->
+      <section class="main-content" id="about-me-content">
+        <Aboutme />
+      </section>
       <aside class="mail-aside">
         <p>lfarredong@eafit.edu.co</p>
       </aside>
     </main>
-    <footer></footer>
+    <footer>
+      <Footer />
+    </footer>
     <script>
-      const mobileNav = document.getElementById("mobileNav");
-      const navButton = document.getElementById("navButton");
+      const mobileNav = document.getElementById("mobile-nav");
+      const navButton = document.getElementById("nav-bars-icon");
 
       navButton!.addEventListener("click", () => {
+        console.log("click")
         mobileNav!.style.display == "none"
           ? (mobileNav!.style.display = "")
           : (mobileNav!.style.display = "none");
@@ -186,6 +190,12 @@ const { title } = Astro.props;
 
       const steeful = document.getElementById("steeful");
       const postobon = document.getElementById("postobon");
+      const aboutNav = document.getElementById("about-nav-item");
+
+      aboutNav!.addEventListener("click", () => {
+        let aboutMeContent = document.getElementById("about-me-content");
+        aboutMeContent!.scrollIntoView({ behavior: "smooth", block: "end" });
+      });
 
       steeful!.addEventListener("click", () => {
         window.open("https://www.steeful.com/");
@@ -205,6 +215,7 @@ const { title } = Astro.props;
     --font-mono: "Fira Code", monospace;
     --navy: #0a192f;
     --third-color: #7a04eb;
+    --p-color: rgb(165, 163, 163);
   }
 
   * {
@@ -275,6 +286,13 @@ const { title } = Astro.props;
     justify-content: space-between;
   }
 
+  footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
   .media-aside {
     width: 5%;
     height: 100px;
@@ -306,7 +324,7 @@ const { title } = Astro.props;
 
   .main-content {
     width: 60%;
-    margin: auto;
+    margin: 120px auto;
   }
 
   .mail-aside {
@@ -373,7 +391,7 @@ const { title } = Astro.props;
     display: none;
   }
 
-  #navButton {
+  #nav-bars-icon {
     display: none;
   }
 
@@ -381,9 +399,16 @@ const { title } = Astro.props;
     header {
       display: none;
     }
+    .main-name {
+      font-size: 25px;
+    }
+    #nav-bars-icon {
+      display: block;
+    }
     .mobile-header {
       color: var(--secondary-color);
       text-align: center;
+      display: block;
     }
     .fa-bars {
       color: var(--secondary-color);
@@ -397,15 +422,21 @@ const { title } = Astro.props;
       height: 200px;
     }
     .my-profile {
-      text-align: center;
+      text-align: left;
+    }
+    .my-little-desc{
+      font-size: 30px;
     }
     .my-complete-desc {
-      text-align: center;
-      margin: 10 auto;
+      text-align: left;
+      margin: 10px -10px;
       width: 100%;
     }
     .media-aside {
       margin: 10px;
+    }
+    .main-content{
+      width: 75%;
     }
   }
 </style>
